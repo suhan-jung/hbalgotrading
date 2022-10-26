@@ -26,9 +26,9 @@ Description for Package
 # from .data_repository import DataRepository
 # from .database import Database
 # from .mass_simulator import MassSimulator
-from .kis_data_provider import KisDataProvider
+from .eikon_data_provider import EikonDataProvider
 __all__ = [
-    "KisDataProvider",
+    "EikonDataProvider",
 ]
 
 
