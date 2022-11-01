@@ -28,11 +28,6 @@ Description for Package
 # from .mass_simulator import MassSimulator
 from .eikon_data_provider import EikonDataProvider
 __all__ = [
-    "EikonDataProvider",
-]
-
-
-# __all__ = [
 #     "Operator",
 #     "LogManager",
 #     "Analyzer",
@@ -51,5 +46,6 @@ __all__ = [
 #     "UpbitDataProvider",
 #     "BinanceDataProvider",
 #     "MassSimulator",
-# ]
+    "EikonDataProvider",
+]
 __version__ = "1.0.0"

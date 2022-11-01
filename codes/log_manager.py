@@ -9,7 +9,7 @@ class LogManager:
     파일, 스트림 핸들러가 설정된 logger 인스턴스를 제공하는 클래스
     """
 
-    log_filename = "smtm.log"
+    log_filename = "hbalgo.log"
     log_file_size = 2097152
     log_file_backup = 10
     file_formatter = logging.Formatter(
@@ -47,7 +47,7 @@ class LogManager:
         cls.stream_handler.setLevel(level)
 
     @classmethod
-    def change_log_file(cls, log_file="smtm.log"):
+    def change_log_file(cls, log_file="hbalgo.log"):
         """파일 핸들러의 로그 파일을 변경한다"""
         if log_file == cls.log_filename:
             return
