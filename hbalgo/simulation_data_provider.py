@@ -1,6 +1,8 @@
 """시뮬레이션을 위한 DataProvider 구현체"""
 
+import os
 import copy
+import eikon as ek
 import requests
 from .date_converter import DateConverter
 from .data_provider import DataProvider
@@ -23,9 +25,11 @@ class SimulationDataProvider(DataProvider):
 
     # URL = "https://api.upbit.com/v1/candles/minutes/1"
     # QUERY_STRING = {"market": "KRW-BTC"}
+    PARAMS = {"rics": AVAILABLE_ASSET["LKTB"]}
 
     def __init__(self):
         self.logger = LogManager.get_logger(__class__.__name__)
+        self.APP_KEY = os.environ.get("EIKON_API_KEY", "eikon_api_key")
         self.is_initialized = False
         self.data = []
         self.index = 0
@@ -34,26 +38,24 @@ class SimulationDataProvider(DataProvider):
         """Eikon Data Api를 사용해서 데이터를 가져와서 초기화한다"""
 
         self.index = 0
-        query_string = copy.deepcopy(self.QUERY_STRING)
-
+        params = copy.deepcopy(self.PARAMS)
+        
         try:
             if end is not None:
-                query_string["to"] = DateConverter.from_kst_to_utc_str(end) + "Z"
-            query_string["count"] = count
-
-            response = requests.get(self.URL, params=query_string)
-            response.raise_for_status()
-            self.data = response.json()
-            self.data.reverse()
+                params["end_date"] = DateConverter.from_kst_to_utc_str(end)
+            params["count"] = count
+            params["interval"] = "minute"
+            ek.set_app_key(self.APP_KEY)
+            response = ek.get_timeseries(**params)
+            # ek.timeseries 결과의 DatetimeIndex 는 naive UTC 기준이므로 
+            response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None)
+            self.data = response.reset_index().to_dict(orient='records')
             self.is_initialized = True
             self.logger.info(f"data is updated from server # end: {end}, count: {count}")
         except ValueError as error:
-            self.logger.error("Invalid data from server")
+            self.logger.error("Parameter type or value is wrong")
             raise UserWarning("Fail get data from sever") from error
-        except requests.exceptions.HTTPError as error:
-            self.logger.error(error)
-            raise UserWarning("Fail get data from sever") from error
-        except requests.exceptions.RequestException as error:
+        except Exception as error:
             self.logger.error(error)
             raise UserWarning("Fail get data from sever") from error
 
@@ -78,20 +80,20 @@ class SimulationDataProvider(DataProvider):
             return None
 
         self.index = now + 1
-        self.logger.info(f'[DATA] @ {self.data[now]["candle_date_time_kst"]}')
+        self.logger.info(f'[DATA] @ {DateConverter.to_iso_string(self.data[now]["Date"])}')
         return self.__create_candle_info(self.data[now])
 
     def __create_candle_info(self, data):
         try:
             return {
-                "market": data["market"],
-                "date_time": data["candle_date_time_kst"],
-                "opening_price": data["opening_price"],
-                "high_price": data["high_price"],
-                "low_price": data["low_price"],
-                "closing_price": data["trade_price"],
-                "acc_price": data["candle_acc_trade_price"],
-                "acc_volume": data["candle_acc_trade_volume"],
+                "market": "LKTB",
+                "date_time": DateConverter.to_iso_string(data["Date"]),
+                "opening_price": data["OPEN"],
+                "high_price": data["HIGH"],
+                "low_price": data["LOW"],
+                "closing_price": data["CLOSE"],
+                "acc_price": 0,
+                "acc_volume": data["VOLUME"],
             }
         except KeyError:
             self.logger.warning("invalid data for candle info")

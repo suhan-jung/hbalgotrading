@@ -6,7 +6,7 @@ from .date_converter import DateConverter
 # from .log_manager import LogManager
 # from .analyzer import Analyzer
 # from .simulation_trader import SimulationTrader
-# from .simulation_data_provider import SimulationDataProvider
+from .simulation_data_provider import SimulationDataProvider
 # from .simulation_operator import SimulationOperator
 # from .strategy_bnh import StrategyBuyAndHold
 # from .strategy_sma_0 import StrategySma0
@@ -28,11 +28,12 @@ from .date_converter import DateConverter
 # from .mass_simulator import MassSimulator
 from .eikon_data_provider import EikonDataProvider
 __all__ = [
+    "DateConverter",
 #     "Operator",
 #     "LogManager",
 #     "Analyzer",
 #     "SimulationTrader",
-#     "SimulationDataProvider",
+    "SimulationDataProvider",
 #     "SimulationOperator",
 #     "StrategyBuyAndHold",
 #     "StrategySma0",

@@ -1,4 +1,4 @@
-import os, json
+import os
 import eikon as ek
 from dotenv import load_dotenv
 from .data_provider import DataProvider
