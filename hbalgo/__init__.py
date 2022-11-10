@@ -8,7 +8,7 @@ from .date_converter import DateConverter
 # from .simulation_trader import SimulationTrader
 from .simulation_data_provider import SimulationDataProvider
 # from .simulation_operator import SimulationOperator
-# from .strategy_bnh import StrategyBuyAndHold
+from .strategy_bnh import StrategyBuyAndHold
 # from .strategy_sma_0 import StrategySma0
 # from .strategy_rsi import StrategyRsi
 # from .strategy_momentum import StrategyMomentum
@@ -35,7 +35,7 @@ __all__ = [
 #     "SimulationTrader",
     "SimulationDataProvider",
 #     "SimulationOperator",
-#     "StrategyBuyAndHold",
+    "StrategyBuyAndHold",
 #     "StrategySma0",
 #     "StrategyRsi",
 #     "StrategyMomentum",
