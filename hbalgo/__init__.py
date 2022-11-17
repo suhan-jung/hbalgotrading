@@ -5,7 +5,7 @@ from .date_converter import DateConverter
 # from .operator import Operator
 # from .log_manager import LogManager
 # from .analyzer import Analyzer
-# from .simulation_trader import SimulationTrader
+from .simulation_trader import SimulationTrader
 from .simulation_data_provider import SimulationDataProvider
 # from .simulation_operator import SimulationOperator
 from .strategy_bnh import StrategyBuyAndHold
@@ -32,7 +32,7 @@ __all__ = [
 #     "Operator",
 #     "LogManager",
 #     "Analyzer",
-#     "SimulationTrader",
+    "SimulationTrader",
     "SimulationDataProvider",
 #     "SimulationOperator",
     "StrategyBuyAndHold",

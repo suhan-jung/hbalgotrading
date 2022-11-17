@@ -186,7 +186,7 @@ class StrategyBuyAndHold(Strategy):
                 ]
             return None
 
-    def initialize(self, budget, min_price=100000000): # 최소주문금액:5억원
+    def initialize(self, budget, min_price=100000000): # 최소주문금액:1억원
         """
         예산과 최소 거래 가능 금액을 설정한다
         """

@@ -3,7 +3,7 @@
 import os
 import copy
 import eikon as ek
-import requests
+# import requests
 from .date_converter import DateConverter
 from .data_provider import DataProvider
 from .log_manager import LogManager
