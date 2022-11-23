@@ -48,7 +48,7 @@ class SimulationDataProvider(DataProvider):
             ek.set_app_key(self.APP_KEY)
             response = ek.get_timeseries(**params)
             # ek.timeseries 결과의 DatetimeIndex 는 naive UTC 기준이므로 
-            response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None)
+            response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None).strftime('%Y-%m-%dT%X')
             self.data = response.reset_index().to_dict(orient='records')
             self.is_initialized = True
             self.logger.info(f"data is updated from server # end: {end}, count: {count}")
@@ -80,14 +80,14 @@ class SimulationDataProvider(DataProvider):
             return None
 
         self.index = now + 1
-        self.logger.info(f'[DATA] @ {DateConverter.to_iso_string(self.data[now]["Date"])}')
+        self.logger.info(f'[DATA] @ {self.data[now]["Date"]}')
         return self.__create_candle_info(self.data[now])
 
     def __create_candle_info(self, data):
         try:
             return {
                 "market": "LKTB",
-                "date_time": DateConverter.to_iso_string(data["Date"]),
+                "date_time": data["Date"],
                 "opening_price": data["OPEN"],
                 "high_price": data["HIGH"],
                 "low_price": data["LOW"],

@@ -43,7 +43,7 @@ class EikonDataProvider(DataProvider):
         try:
             return {
                 "market": self.asset,
-                "date_time": data["Date"].tz_localize('UTC').tz_convert('Asia/Seoul').strftime('%Y-%m-%dT%X'),
+                "date_time": data["Date"],
                 "opening_price": float(data["OPEN"]),
                 "high_price": float(data["HIGH"]),
                 "low_price": float(data["LOW"]),
@@ -59,6 +59,7 @@ class EikonDataProvider(DataProvider):
         try:
             ek.set_app_key(self.APP_KEY)
             response = ek.get_timeseries(self.AVAILABLE_ASSET[self.asset], interval="minute", count=1)
+            response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None).strftime('%Y-%m-%dT%X')
             return response.reset_index().to_dict(orient='records')
         except ValueError as error:
             self.logger.error(f"Invalid parameter type of value: {error}")
