@@ -66,7 +66,7 @@ class VirtualMarket:
         try:
             response = ek.get_timeseries(**params)
             # ek.timeseries 결과의 DatetimeIndex 는 naive UTC 기준이므로
-            response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None)
+            response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None).strftime('%Y-%m-%dT%X')
             response["TICKER"] = response.columns.name
             self.data = response.reset_index().to_dict(orient='records')
             self.balance = budget
@@ -129,7 +129,7 @@ class VirtualMarket:
         if self.is_initialized is not True:
             self.logger.error("virtual market is NOT initialized")
             return None
-        now = DateConverter.to_iso_string(self.data[self.turn_count]["Date"])
+        now = self.data[self.turn_count]["Date"]
         self.turn_count += 1
         next_index = self.turn_count
 

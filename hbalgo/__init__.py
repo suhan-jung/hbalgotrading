@@ -4,7 +4,7 @@ Description for Package
 from .date_converter import DateConverter
 # from .operator import Operator
 # from .log_manager import LogManager
-# from .analyzer import Analyzer
+from .analyzer import Analyzer
 from .simulation_trader import SimulationTrader
 from .simulation_data_provider import SimulationDataProvider
 # from .simulation_operator import SimulationOperator
@@ -31,7 +31,7 @@ __all__ = [
     "DateConverter",
 #     "Operator",
 #     "LogManager",
-#     "Analyzer",
+    "Analyzer",
     "SimulationTrader",
     "SimulationDataProvider",
 #     "SimulationOperator",
