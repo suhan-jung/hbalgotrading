@@ -39,7 +39,7 @@ class SimulationDataProvider(DataProvider):
 
         self.index = 0
         params = copy.deepcopy(self.PARAMS)
-        
+
         try:
             if end is not None:
                 params["end_date"] = DateConverter.from_kst_to_utc_str(end)
@@ -47,7 +47,7 @@ class SimulationDataProvider(DataProvider):
             params["interval"] = "minute"
             ek.set_app_key(self.APP_KEY)
             response = ek.get_timeseries(**params)
-            # ek.timeseries 결과의 DatetimeIndex 는 naive UTC 기준이므로 
+            # ek.timeseries 결과의 DatetimeIndex 는 naive UTC 기준이므로
             response.index = response.index.tz_localize('UTC').tz_convert('Asia/Seoul').tz_localize(None).strftime('%Y-%m-%dT%X')
             self.data = response.reset_index().to_dict(orient='records')
             self.is_initialized = True
