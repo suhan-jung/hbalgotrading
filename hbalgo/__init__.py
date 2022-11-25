@@ -2,12 +2,12 @@
 Description for Package
 """
 from .date_converter import DateConverter
-# from .operator import Operator
+from .operator import Operator
 # from .log_manager import LogManager
 from .analyzer import Analyzer
 from .simulation_trader import SimulationTrader
 from .simulation_data_provider import SimulationDataProvider
-# from .simulation_operator import SimulationOperator
+from .simulation_operator import SimulationOperator
 from .strategy_bnh import StrategyBuyAndHold
 # from .strategy_sma_0 import StrategySma0
 # from .strategy_rsi import StrategyRsi
@@ -29,14 +29,14 @@ from .strategy_bnh import StrategyBuyAndHold
 from .eikon_data_provider import EikonDataProvider
 __all__ = [
     "DateConverter",
-#     "Operator",
+    "Operator",
 #     "LogManager",
     "Analyzer",
     "SimulationTrader",
     "SimulationDataProvider",
-#     "SimulationOperator",
+    "SimulationOperator",
     "StrategyBuyAndHold",
-#     "StrategySma0",
+    # "StrategySma0",
 #     "StrategyRsi",
 #     "StrategyMomentum",
 #     "VirtualMarket",
