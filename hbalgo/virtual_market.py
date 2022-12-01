@@ -22,12 +22,12 @@ class VirtualMarket:
 
     # AVAILABLE_ASSET = {"LKTB": "10TBc1", "KTB": "KTBc1"}
     dict_lktbf = {
-        "name": "LKTBF",
+        "name": "10TBc1",
         "multiplier": 1000000, # 국채선물 거래승수 - 100만
         "commission": 800
         }
     dict_ktbf = {
-        "name": "KTBF",
+        "name": "KTBc1",
         "multiplier": 1000000, # 국채선물 거래승수 - 100만
         "commission": 2000
         }

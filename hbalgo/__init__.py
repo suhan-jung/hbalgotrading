@@ -3,18 +3,18 @@ Description for Package
 """
 from .date_converter import DateConverter
 from .operator import Operator
-# from .log_manager import LogManager
+from .log_manager import LogManager
 from .analyzer import Analyzer
 from .simulation_trader import SimulationTrader
 from .simulation_data_provider import SimulationDataProvider
 from .simulation_operator import SimulationOperator
 from .strategy_bnh import StrategyBuyAndHold
-# from .strategy_sma_0 import StrategySma0
+from .strategy_sma_0 import StrategySma0
 # from .strategy_rsi import StrategyRsi
 # from .strategy_momentum import StrategyMomentum
 # from .virtual_market import VirtualMarket
 # from .worker import Worker
-# from .simulator import Simulator
+from .simulator import Simulator
 # from .upbit_trader import UpbitTrader
 # from .bithumb_trader import BithumbTrader
 # from .upbit_data_provider import UpbitDataProvider
@@ -30,18 +30,18 @@ from .eikon_data_provider import EikonDataProvider
 __all__ = [
     "DateConverter",
     "Operator",
-#     "LogManager",
+    "LogManager",
     "Analyzer",
     "SimulationTrader",
     "SimulationDataProvider",
     "SimulationOperator",
     "StrategyBuyAndHold",
-    # "StrategySma0",
+    "StrategySma0",
 #     "StrategyRsi",
 #     "StrategyMomentum",
 #     "VirtualMarket",
 #     "Worker",
-#     "Simulator",
+    "Simulator",
 #     "UpbitTrader",
 #     "BithumbTrader",
 #     "UpbitDataProvider",

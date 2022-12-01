@@ -29,6 +29,7 @@ class Analyzer:
     OUTPUT_FOLDER = "output/"
     RECORD_INTERVAL = 60
     SMA = (5, 20)
+    MULTIPLIER = 1000000
 
     def __init__(self):
         self.request_list = []
@@ -198,7 +199,7 @@ class Analyzer:
                 amount = float(item[1])
                 buy_avg = float(item[0])
                 price = float(current_quote[name])
-                current_total += amount * price
+                current_total += amount * price * self.MULTIPLIER # MULTIPLIER 추가 by sh
                 item_price_diff = price - buy_avg
                 if item_price_diff != 0 and buy_avg != 0:
                     item_yield = (price - buy_avg) / buy_avg * 100
