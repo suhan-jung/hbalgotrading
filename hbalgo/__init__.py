@@ -15,6 +15,7 @@ from .strategy_sma_0 import StrategySma0
 # from .virtual_market import VirtualMarket
 # from .worker import Worker
 from .simulator import Simulator
+from .kis_trader import KisTrader
 # from .upbit_trader import UpbitTrader
 # from .bithumb_trader import BithumbTrader
 # from .upbit_data_provider import UpbitDataProvider
@@ -42,6 +43,7 @@ __all__ = [
 #     "VirtualMarket",
 #     "Worker",
     "Simulator",
+    "KisTrader",
 #     "UpbitTrader",
 #     "BithumbTrader",
 #     "UpbitDataProvider",
